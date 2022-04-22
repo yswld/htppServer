@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, g
+from flask import Flask, render_template, request, jsonify, g, send_file
 import time
 import sqlite3
 
@@ -18,6 +18,18 @@ def list():
     cur = con.execute("select * from data_table")
     data = cur.fetchall()
     return render_template('index.html', data=data)
+
+@app.route('/export')
+def export():
+    con = get_db_connection()
+    filepath = './temp/data.csv'
+    filename = 'data.csv'
+    with open(filepath, "w", encoding="utf-8") as f:
+        for row in con.execute("select * from data_table"):
+            f.write(','.join([str(c) for c in row]) + '\n')
+    
+    return send_file(filepath, as_attachment=True, attachment_filename=filename)
+
 
 @app.route('/', methods=['POST'])
 def post_json():
