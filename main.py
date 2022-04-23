@@ -39,17 +39,19 @@ def post_json():
     received_time = int(time.time())
     json = request.get_json()  # POSTされたJSONを取得
     
-    # テンプレートから新規登録する商品名と値段を取得
     id = request.json["id"]
     name = request.json["name"]
     device_time = request.json["device_time"]
+    rssi = request.json["rssi"]
+    rsrp = request.json["rsrp"]
+    rsrq = request.json["rsrq"]
 
     # データベース接続
     con = get_db_connection()
     if con.execute("select count(*) from sqlite_master where type='table'").fetchone()[0] == 0:
-        con.execute("create table data_table(id integer, name varchar(10), time integer, device_time integer)")
+        con.execute("create table data_table(id integer, name varchar(10), received_time integer, device_time integer, rssi real, rsrp real, rsrq real, path varchar(20))")
 
-    con.execute(f"insert into data_table values({id},'{name}',{received_time},{device_time})")
+    con.execute(f"insert into data_table values({id},'{name}',{received_time},{device_time},{rssi},{rsrp},{rsrq},'{name}')")
 
     cur = con.execute("select * from data_table")
 

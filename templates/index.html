@@ -2,16 +2,21 @@
 <html lang="jp">
 <head>
     <meta charset="UTF-8">
-    <title>商品一覧ページ</title>
+    <title>db</title>
 </head>
 <body>
     <div>
         <table>
             <thead>
                 <tr>
-                    <th>コード</th>
-                    <th>商品名</th>
-                    <th>値段</th>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>received_time</th>
+                    <th>device_time</th>
+                    <th>rssi</th>
+                    <th>rsrp</th>
+                    <th>rsrq</th>
+                    <th>path</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,11 +25,17 @@
                     <th>{{item[0]}}</th>
                     <th>{{item[1]}}</th>
                     <th>{{item[2]}}</th>
+                    <th>{{item[3]}}</th>
+                    <th>{{item[4]}}</th>
+                    <th>{{item[5]}}</th>
+                    <th>{{item[6]}}</th>
+                    <th>{{item[7]}}</th>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>    
+    <!--
     <form action='/result'>
         <p>＜新規登録＞</p>
         <label>
@@ -37,5 +48,6 @@
         </label>
         <button type="submit" formmethod="POST">登録</button>
     </form>
+    -->
 </body>
 </html>
