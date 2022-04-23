@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify, g, send_file
+import os
 import time
 import sqlite3
 
@@ -24,6 +25,8 @@ def export():
     con = get_db_connection()
     filepath = './temp/data.csv'
     filename = 'data.csv'
+    os.makedirs('./temp/', exist_ok=True)
+
     with open(filepath, "w", encoding="utf-8") as f:
         for row in con.execute("select * from data_table"):
             f.write(','.join([str(c) for c in row]) + '\n')
