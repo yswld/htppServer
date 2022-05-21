@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, jsonify, g, send_file
+from flask_bootstrap import Bootstrap
 import os
 import time
 import sqlite3
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
 def get_db_connection():
     if 'db_con' not in g:
