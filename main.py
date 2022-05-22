@@ -35,6 +35,13 @@ def export():
     
     return send_file(filepath, as_attachment=True, attachment_filename=filename)
 
+@app.route('/exportdb')
+def exportdb():
+    filepath = 'data.db'
+    filename = 'data.db'
+    
+    return send_file(filepath, as_attachment=True, attachment_filename=filename)
+
 
 @app.route('/', methods=['POST'])
 def post_json():
